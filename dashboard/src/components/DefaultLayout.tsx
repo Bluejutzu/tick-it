@@ -8,9 +8,6 @@ export default function DefaultLayout({ children }: {children: ReactNode}) {
       <Navbar />
       <main className='container flex-1 flex-grow'>{children}</main>
       <Footer />
-      <div>
-        this is a div
-      </div>
     </div>
     
   );
