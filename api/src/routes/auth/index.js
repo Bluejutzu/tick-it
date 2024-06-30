@@ -97,7 +97,7 @@ router.get("/callback", async (req, res) => {
   res
     .status(200)
     .cookie("token", token, {
-      domain: "https://ticketit.vercel.app/",
+      domain: "ticketit.vercel.app",
       httpOnly: true,
       // expires: new Date(Date.now() + 6.048e8),
       secure: process.env.NODE_ENV === "development",
