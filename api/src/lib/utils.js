@@ -1,5 +1,4 @@
-const { PermissionsBitField } = require('discord.js');
-
+const { PermissionsBitField } = require("discord.js");
 /**
  * @param {string | number | bigint} permissions
  * @param {import('discord.js').PermissionsString} permission

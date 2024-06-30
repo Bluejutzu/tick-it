@@ -8,7 +8,7 @@ require('dotenv/config');
 
 const app = express();
 
-app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 app.use(cookieParser());
 app.use('/', baseMiddleware);
 app.use('/', baseRouter);
@@ -19,9 +19,9 @@ if (!process.env.MONGODB_URI) {
   throw new Error('MONGODB_URI required in .env');
 }
 
-mongoose.connect(process.env.MONGODB_URI).then(() => {
+mongoose.connect("mongodb://localhost:27017/dev").then(() => {
   console.log('Connected to database.');
-
+  
   app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
   });

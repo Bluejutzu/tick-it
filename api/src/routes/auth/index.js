@@ -1,25 +1,25 @@
-const express = require('express');
-const User = require('../../models/User');
-const jwt = require('jsonwebtoken');
+const express = require("express");
+const User = require("../../models/User");
+const jwt = require("jsonwebtoken");
 
 const router = express.Router();
 
 // GET: api.tick-it.com/auth/signin
 // GET: api.tick-it.com/auth/callback
 
-const DASHBOARD_URL = 'http://localhost:5173';
+const DASHBOARD_URL = "http://localhost:3000";
 
-router.get('/signin', (req, res) => {
+router.get("/signin", (req, res) => {
   res.redirect(
     `https://discord.com/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT_ID}&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Fauth%2Fcallback&scope=guilds+identify`
   );
 });
 
-router.get('/callback', async (req, res) => {
-  const DISCORD_ENDPOINT = 'https://discord.com/api/v10';
+router.get("/callback", async (req, res) => {
+  const DISCORD_ENDPOINT = "https://discord.com/api/v10";
   const CLIENT_ID = process.env.DISCORD_CLIENT_ID;
   const CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET;
-  const REDIRECT_URI = process.env.DISCORD_REDIRECT_URI;
+  const REDIRECT_URI = "http://localhost:3001/auth/callback";
 
   const { code } = req.query;
 
@@ -30,37 +30,37 @@ router.get('/callback', async (req, res) => {
   }
 
   const oauthRes = await fetch(`${DISCORD_ENDPOINT}/oauth2/token`, {
-    method: 'POST',
+    method: "POST",
     body: new URLSearchParams({
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
-      grant_type: 'authorization_code',
+      grant_type: "authorization_code",
       redirect_uri: REDIRECT_URI,
       code,
     }).toString(),
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      "Content-Type": "application/x-www-form-urlencoded",
     },
   });
 
   if (!oauthRes.ok) {
-    console.log('error', oauthRes);
-    res.send('error');
+    console.log("error", oauthRes);
+    res.send('error')
     return;
   }
 
   const oauthResJson = await oauthRes.json();
 
   const userRes = await fetch(`${DISCORD_ENDPOINT}/users/@me`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      "Content-Type": "application/x-www-form-urlencoded",
       Authorization: `Bearer ${oauthResJson.access_token}`,
     },
   });
 
   if (!userRes.ok) {
-    return res.send('error');
+    return res.send("error");
   }
 
   const userResJson = await userRes.json();
@@ -91,24 +91,24 @@ router.get('/callback', async (req, res) => {
       avatarHash: userResJson.avatar,
     },
     process.env.JWT_SECRET,
-    { expiresIn: '7d' }
+    { expiresIn: "7d" }
   );
 
   res
     .status(200)
-    .cookie('token', token, {
-      domain: 'localhost',
+    .cookie("token", token, {
+      domain: "localhost",
       httpOnly: true,
       // expires: new Date(Date.now() + 6.048e8),
-      secure: process.env.NODE_ENV === 'development',
+      secure: process.env.NODE_ENV === "development",
       maxAge: 6.048e8,
       // sameSite: ''
     })
     .redirect(DASHBOARD_URL);
 });
 
-router.get('/signout', (req, res) => {
-  res.clearCookie('token').sendStatus(200);
+router.get("/signout", (req, res) => {
+  res.clearCookie("token").sendStatus(200);
 });
 
 module.exports = router;
