@@ -7,7 +7,7 @@ const router = express.Router();
 // GET: api.tick-it.com/auth/signin
 // GET: api.tick-it.com/auth/callback
 
-const DASHBOARD_URL = "http://localhost:3000";
+const DASHBOARD_URL = "https://ticketit.vercel.app/";
 
 router.get("/signin", (req, res) => {
   res.redirect(
@@ -97,7 +97,7 @@ router.get("/callback", async (req, res) => {
   res
     .status(200)
     .cookie("token", token, {
-      domain: "localhost",
+      domain: "https://ticketit.vercel.app/",
       httpOnly: true,
       // expires: new Date(Date.now() + 6.048e8),
       secure: process.env.NODE_ENV === "development",
