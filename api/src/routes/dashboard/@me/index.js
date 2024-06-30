@@ -25,10 +25,12 @@ router.get("/guilds", async (req, res) => {
   const skipCache = req.query.skipcache;
 
   if (!skipCache) {
-    const redisCacheRes = await redis.get(`user-guilds:${req.user.id}`);
+    if (redis) {
+      const redisCacheRes = await redis.get(`user-guilds:${req.user.id}`);
 
-    if (redisCacheRes) {
-      return res.status(200).json(JSON.parse(redisCacheRes));
+      if (redisCacheRes) {
+        return res.status(200).json(JSON.parse(redisCacheRes));
+      }
     }
   }
 
@@ -67,12 +69,14 @@ router.get("/guilds", async (req, res) => {
     hasPermissions(guild.permissions, "Administrator")
   );
   console.log("Common guilds:", commonGuilds);
-  await redis.set(
-    `user-guilds:${req.user.id}`,
-    JSON.stringify(commonGuilds),
-    "EX",
-    600
-  );
+  if (redis) {
+    await redis.set(
+      `user-guilds:${req.user.id}`,
+      JSON.stringify(commonGuilds),
+      "EX",
+      600
+    );
+  }
 
   res.status(200).json(commonGuilds);
 });

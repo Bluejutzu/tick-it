@@ -7,7 +7,7 @@ const router = express.Router();
 // GET: api.tick-it.com/auth/signin
 // GET: api.tick-it.com/auth/callback
 
-const DASHBOARD_URL = "https://ticketit.vercel.app/";
+const DASHBOARD_URL = "https://ticketit.vercel.app";
 
 router.get("/signin", (req, res) => {
   res.redirect(

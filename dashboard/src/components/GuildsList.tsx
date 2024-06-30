@@ -6,6 +6,7 @@ import { FaDiscord } from "react-icons/fa";
 import { buttonVariants } from "./ui/button";
 import Link from "next/link";
 import { cn } from "../lib/utils";
+import Image from "next/image";
 
 const SIGNIN_URL = "http://localhost:3001/auth/signin";
 
@@ -102,15 +103,19 @@ export default function GuildsList() {
                   >
                     {guild.icon ? (
                       <>
-                        <img
+                        <Image
                           src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.webp?size=256`}
                           alt={guild.name}
+                          width={256}
+                          height={256}
                           className="absolute inset-0 blur-sm w-full h-1/2 -z-20 object-cover brightness-[20%]"
                           aria-hidden
                         />
-                        <img
+                        <Image
                           src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.webp?size=128`}
                           alt={guild.name}
+                          width={128}
+                          height={128}
                           className="size-14 rounded-full mb-2"
                         />
                       </>

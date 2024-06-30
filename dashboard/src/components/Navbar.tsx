@@ -3,10 +3,12 @@
 import { CircleUser, Loader2, LogOut } from "lucide-react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface userint {
   avatarHash: string;
   id: string;
+  username: string
 }
 
 export default function Navbar() {
@@ -27,6 +29,7 @@ export default function Navbar() {
         }
 
         const user = await res.json();
+        console.log(user)
 
         setUser(user);
       } catch (error) {
@@ -113,9 +116,12 @@ export default function Navbar() {
                     className="flex items-center justify-center"
                   >
                     {user && user.avatarHash ? (
-                      <img
+                      <Image
+                      alt={`name`}
                         src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatarHash}.webp?size=128`}
                         className="size-6 object-cover rounded-full border"
+                        width={128}
+                        height={128}
                       />
                     ) : (
                       <CircleUser className="size-6" />
