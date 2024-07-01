@@ -28,6 +28,7 @@ export default function GuildsList() {
         const res = await fetch("http://localhost:3001/dashboard/@me/guilds", {
           credentials: "include",
         });
+        console.log(res)
 
         if (!res.ok) {
           switch (res.status) {
@@ -57,7 +58,7 @@ export default function GuildsList() {
     try {
       const res = await fetch(
         "http://localhost:3001/dashboard/@me/guilds?skipcache=true",
-        { credentials: "include" }
+        { credentials: "include",  }
       );
 
       if (!res.ok) {

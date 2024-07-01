@@ -22,7 +22,7 @@ if (!process.env.MONGODB_URI) {
 mongoose.connect("mongodb://localhost:27017/dev").then(() => {
   console.log('Connected to database.');
   
-  app.listen(Domain, () => {
+  app.listen("https://ticketit.vercel.app", () => {
     console.log(`Listening on Domain ${Domain}`);
   });
 });

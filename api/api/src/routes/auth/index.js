@@ -97,10 +97,8 @@ router.get("/callback", async (req, res) => {
   res
     .status(200)
     .cookie("token", token, {
-      domain: ".vercel.app",
       path: '/',
       httpOnly: true,
-      // expires: new Date(Date.now() + 6.048e8),
       secure: process.env.NODE_ENV === "development",
       maxAge: 6.048e8,
       // sameSite: ''
