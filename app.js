@@ -8,6 +8,9 @@ require('dotenv/config');
 
 const app = express();
 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
 app.use(cors({ credentials: true, origin: 'https://ticketit.vercel.app'  }));
 app.use(cookieParser());
 app.use('/', baseMiddleware);
