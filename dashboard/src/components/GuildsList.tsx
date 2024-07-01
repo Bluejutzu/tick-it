@@ -7,7 +7,7 @@ import { buttonVariants } from "./ui/button";
 import Link from "next/link";
 import { cn } from "../lib/utils";
 
-const SIGNIN_URL = "http://localhost:3001/auth/signin";
+const SIGNIN_URL = "https://api-ticket-it.vercel.app/auth/signin";
 
 interface Guilds {
   id: string;
@@ -24,7 +24,7 @@ export default function GuildsList() {
       setLoading(true);
 
       try {
-        const res = await fetch("http://localhost:3001/dashboard/@me/guilds", {
+        const res = await fetch("https://api-ticket-it.vercel.app/dashboard/@me/guilds", {
           credentials: "include",
         });
 
@@ -55,7 +55,7 @@ export default function GuildsList() {
 
     try {
       const res = await fetch(
-        "http://localhost:3001/dashboard/@me/guilds?skipcache=true",
+        "https://api-ticket-it.vercel.app/dashboard/@me/guilds?skipcache=true",
         { credentials: "include" }
       );
 

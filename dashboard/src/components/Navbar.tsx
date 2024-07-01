@@ -18,7 +18,7 @@ export default function Navbar() {
       setLoading(true);
 
       try {
-        const res = await fetch("http://localhost:3001/dashboard/@me", {
+        const res = await fetch("https://api-ticket-it.vercel.app/dashboard/@me", {
           credentials: "include",
         });
 
@@ -39,7 +39,7 @@ export default function Navbar() {
 
   async function handleLogout() {
     try {
-      const res = await fetch("http://localhost:3001/auth/signout", {
+      const res = await fetch("https://api-ticket-it.vercel.app/auth/signout", {
         credentials: "include",
       });
 
