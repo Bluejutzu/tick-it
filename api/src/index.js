@@ -12,6 +12,9 @@ app.use(cors({ credentials: true, origin: 'https://ticketit.vercel.app'  }));
 app.use(cookieParser());
 app.use('/', baseMiddleware);
 app.use('/', baseRouter);
+app.get('/', (req, res) => {
+  res.send("Hello world")
+})
 const Domain = '3001';
 
 if (!process.env.MONGODB_URI) {
