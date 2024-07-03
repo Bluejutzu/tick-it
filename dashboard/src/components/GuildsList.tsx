@@ -31,7 +31,6 @@ export default function GuildsList() {
         if (!res.ok) {
           switch (res.status) {
             case 401:
-              window.location.href = SIGNIN_URL;
               throw new Error("Not authenticated");
 
             default:
