@@ -23,7 +23,8 @@ export default function Navbar() {
         );
 
         if (!res.ok) {
-          throw new Error("Not authenticated");
+          const text = await res.text()
+          console.log(text)
         }
 
         const user = await res.json();
