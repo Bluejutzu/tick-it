@@ -64,6 +64,7 @@ export default function GuildsList() {
       const guilds = await res.json();
 
       setGuilds(guilds);
+      console.log(guilds)
     } catch (error) {
       console.log(error);
     }
