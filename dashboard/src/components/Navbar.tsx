@@ -18,9 +18,9 @@ export default function Navbar() {
       setLoading(true);
 
       try {
-        const res = await fetch("https://api-ticket-it.vercel.app/dashboard/@me", {
-          credentials: "include",
-        });
+        const res = await fetch(
+          "https://api-ticket-it.vercel.app/dashboard/@me"
+        );
 
         if (!res.ok) {
           throw new Error("Not authenticated");
@@ -39,9 +39,7 @@ export default function Navbar() {
 
   async function handleLogout() {
     try {
-      const res = await fetch("https://api-ticket-it.vercel.app/auth/signout", {
-        credentials: "include",
-      });
+      const res = await fetch("https://api-ticket-it.vercel.app/auth/signout");
 
       if (!res.ok) {
         throw new Error("Failed to logout");

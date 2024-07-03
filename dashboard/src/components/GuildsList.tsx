@@ -24,14 +24,14 @@ export default function GuildsList() {
       setLoading(true);
 
       try {
-        const res = await fetch("https://api-ticket-it.vercel.app/dashboard/@me/guilds", {
-          credentials: "include",
-        });
+        const res = await fetch(
+          "https://api-ticket-it.vercel.app/dashboard/@me/guilds"
+        );
 
         if (!res.ok) {
           switch (res.status) {
             case 401:
-              console.log("error 401")
+              console.log("error 401");
 
             default:
               console.log("An error occurred");
@@ -54,8 +54,7 @@ export default function GuildsList() {
 
     try {
       const res = await fetch(
-        "https://api-ticket-it.vercel.app/dashboard/@me/guilds?skipcache=true",
-        { credentials: "include" }
+        "https://api-ticket-it.vercel.app/dashboard/@me/guilds?skipcache=true"
       );
 
       if (!res.ok) {
