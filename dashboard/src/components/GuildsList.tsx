@@ -25,7 +25,7 @@ export default function GuildsList() {
 
       try {
         const res = await fetch(
-          "https://api-ticket-it.vercel.app/dashboard/@me/guilds"
+          "https://api-ticket-it.vercel.app/dashboard/@me/guilds", { mode: "no-cors" }
         );
 
         if (!res.ok) {
@@ -54,7 +54,8 @@ export default function GuildsList() {
 
     try {
       const res = await fetch(
-        "https://api-ticket-it.vercel.app/dashboard/@me/guilds?skipcache=true"
+        "https://api-ticket-it.vercel.app/dashboard/@me/guilds?skipcache=true",
+        { mode: "no-cors" }
       );
 
       if (!res.ok) {
@@ -64,7 +65,7 @@ export default function GuildsList() {
       const guilds = await res.json();
 
       setGuilds(guilds);
-      console.log(guilds)
+      console.log({ "Guilds: ": guilds });
     } catch (error) {
       console.log(error);
     }

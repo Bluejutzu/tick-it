@@ -19,7 +19,7 @@ export default function Navbar() {
 
       try {
         const res = await fetch(
-          "https://api-ticket-it.vercel.app/dashboard/@me"
+          "https://api-ticket-it.vercel.app/dashboard/@me", { mode: "no-cors" }
         );
 
         if (!res.ok) {
