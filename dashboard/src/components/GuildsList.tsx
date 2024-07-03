@@ -31,10 +31,10 @@ export default function GuildsList() {
         if (!res.ok) {
           switch (res.status) {
             case 401:
-              throw new Error("Not authenticated");
+              console.log("error 401")
 
             default:
-              throw new Error("An error occurred");
+              console.log("An error occurred");
           }
         }
 
